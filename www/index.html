@@ -21,11 +21,41 @@
   </style>
 
 </head>
-<body>
-  <h2>Steroids Repro Template</h2>
+<body onload="onLoad()">
+<h2>Steroids Repro Template - Media Test</h2>
 
-  <script>
-    //Add your JavaScripts here
+  <script type='text/javascript'>
+  var onLoad = function onLoad() {
+    alert('onLoad');
+    document.addEventListener("deviceready", onDeviceReady, false);
+  }
+    
+  var onDeviceReady = function onDeviceReady() {   
+    alert('ready!');
+    myMediaTest();
+  } 
+  
+  var myMediaTest = function myMediaTest(){
+    alert('myMediaTest Enter');
+    var audio_path;
+    if(navigator.userAgent.match(/Android/i)){
+      alert('i am an android');
+      audio_path = "file://" + steroids.app.absolutePath + "/audio/06-engasgamento_bebe-2.mp3";
+      }
+    else 
+      alert('i am an not an android');
+      audio_path = "http://localhost/audio/06-engasgamento_bebe-2.mp3";
+    try {
+        var audio = new Media(audio_path, onPlaySuccess);
+        audio.play(); 
+      } 
+    catch( e ) { 
+      alert( e.message ); 
+    }    
+    var onPlaySuccess = function() {
+        alert('success');
+    }; 
+  }
   </script>
 </body>
 </html>
